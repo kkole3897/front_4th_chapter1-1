@@ -212,7 +212,7 @@ const ProfilePage = () => `
   </div>
 `;
 
-const router = new HistoryRouter();
+const router = HistoryRouter;
 const root = document.getElementById("root");
 router.addRoute("/", () => {
   root.innerHTML = MainPage();
@@ -227,7 +227,6 @@ router.addRoute("/404", () => {
   root.innerHTML = ErrorPage();
 });
 router.addRoute("*", () => {
-  router.navigateTo("/404");
+  router.push("/404");
 });
-const path = window.location.pathname;
-router.handleRoute(path);
+router.init();

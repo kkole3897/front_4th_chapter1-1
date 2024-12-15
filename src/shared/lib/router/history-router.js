@@ -1,30 +1,38 @@
 const DEFAULT_PATH = "*";
 
-export class HistoryRouter {
-  constructor() {
-    this.routes = {};
-    window.addEventListener("popstate", this.handlePopState.bind(this));
+export const HistoryRouter = (function () {
+  const routes = {};
+
+  function addRoute(path, handler) {
+    routes[path] = handler;
   }
 
-  addRoute(path, handler) {
-    this.routes[path] = handler;
-  }
-
-  navigateTo(path) {
+  function push(path) {
     history.pushState(null, "", path);
-    this.handleRoute(path);
+    handleRoute(path);
   }
 
-  handlePopState() {
-    this.handleRoute(window.location.pathname);
-  }
-
-  handleRoute(path) {
-    const handler = this.routes[path];
+  function handleRoute(path) {
+    const handler = routes[path];
     if (handler) {
       handler();
     } else {
-      this.routes[DEFAULT_PATH]?.();
+      routes[DEFAULT_PATH]?.();
     }
   }
-}
+
+  function handlePopState() {
+    handleRoute(window.location.pathname);
+  }
+
+  function init() {
+    window.addEventListener("popstate", handlePopState);
+    push(window.location.pathname);
+  }
+
+  return {
+    init,
+    push,
+    addRoute,
+  };
+})();
