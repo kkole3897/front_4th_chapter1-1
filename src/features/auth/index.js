@@ -1,1 +1,1 @@
-export { signUpLocal } from "./lib";
+export { signUpLocal, loginLocal } from "./lib";

@@ -6,5 +6,5 @@ export const signUpLocal = (data) => {
   const viewer = new Viewer();
 
   users.addUser(data);
-  viewer.setData(data);
+  viewer.login(data);
 };
