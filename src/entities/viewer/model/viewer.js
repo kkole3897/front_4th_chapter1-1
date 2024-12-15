@@ -12,22 +12,26 @@ export class Viewer {
     const rawViewer = localStorage.getItem(VIEWER_KEY);
 
     if (!rawViewer) {
-      this.id = null;
+      this.email = null;
       this.password = null;
+      this.name = null;
+      this.description = null;
     } else {
       const parsedViewer = JSON.parse(rawViewer);
 
-      this.id = parsedViewer.id;
+      this.email = parsedViewer.email;
       this.password = parsedViewer.password;
+      this.name = rawViewer.name ?? "";
+      this.description = rawViewer.description ?? "";
     }
   }
 
   get isAuthenticated() {
-    return this.id != null && this.password != null;
+    return this.email != null && this.password != null;
   }
 
   validate(data) {
-    if (data.id == null && data.password == null) {
+    if (data.email == null && data.password == null) {
       return false;
     }
 
@@ -37,12 +41,14 @@ export class Viewer {
   setData(data) {
     if (this.validate(data)) {
       throw InvalidViewerError(
-        `Invalid identifier(${data.identifier}) or password(${data.password})`,
+        `Invalid email(${data.email}) or password(${data.password})`,
       );
     }
 
-    this.id = data.id;
+    this.email = data.email;
     this.password = data.password;
+    this.name = data.name;
+    this.description = data.description;
 
     localStorage.setItem(VIEWER_KEY, JSON.stringify(data));
   }
