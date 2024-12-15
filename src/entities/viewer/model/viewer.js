@@ -33,8 +33,8 @@ export class Viewer {
   login(data) {
     this.validate(data);
 
-    this.viewer = data;
+    this.viewer = { username: data.username, email: "", bio: "" };
 
-    localStorage.setItem(VIEWER_KEY, JSON.stringify(data));
+    localStorage.setItem(VIEWER_KEY, JSON.stringify(this.viewer));
   }
 }
