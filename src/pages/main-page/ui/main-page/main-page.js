@@ -1,4 +1,5 @@
 import { BaseHeader } from "@/widgets/base-header";
+import { BaseFooter } from "@/widgets/base-footer";
 import { Component } from "@/shared/lib/component";
 
 export class MainPage extends Component {
@@ -11,6 +12,9 @@ export class MainPage extends Component {
 
     const headerEl = this.el.querySelector("#header");
     new BaseHeader(headerEl).render();
+
+    const footerEl = this.el.querySelector("#footer");
+    new BaseFooter(footerEl).render();
   }
 
   template() {
@@ -108,9 +112,7 @@ export class MainPage extends Component {
             </div>
           </main>
 
-          <footer class="bg-gray-200 p-4 text-center">
-            <p>&copy; 2024 항해플러스. All rights reserved.</p>
-          </footer>
+          <div id="footer"></div>
         </div>
       </div>
     `;
