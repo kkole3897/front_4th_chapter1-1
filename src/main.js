@@ -227,6 +227,6 @@ router.addRoute("/404", () => {
   root.innerHTML = ErrorPage();
 });
 router.addRoute("*", () => {
-  router.push("/404");
+  router.replace("/404");
 });
 router.init();

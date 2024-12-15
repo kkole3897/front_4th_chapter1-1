@@ -1,5 +1,6 @@
 import { loginLocal } from "@/features/auth";
 import { Component } from "@/shared/lib/component";
+import { HistoryRouter } from "@/shared/lib/router";
 
 export class LoginForm extends Component {
   constructor(el) {
@@ -15,6 +16,7 @@ export class LoginForm extends Component {
     const data = Object.fromEntries(formData.entries());
     try {
       loginLocal(data);
+      HistoryRouter.push("/");
     } catch {
       alert("로그인 실패");
     }
