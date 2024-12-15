@@ -37,4 +37,9 @@ export class Viewer {
 
     localStorage.setItem(VIEWER_KEY, JSON.stringify(this.viewer));
   }
+
+  logout() {
+    this.viewer = null;
+    localStorage.removeItem(VIEWER_KEY);
+  }
 }
