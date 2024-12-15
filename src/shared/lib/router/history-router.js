@@ -12,6 +12,11 @@ export const HistoryRouter = (function () {
     handleRoute(path);
   }
 
+  function replace(path) {
+    history.replaceState(null, "", path);
+    handleRoute(path);
+  }
+
   function handleRoute(path) {
     const handler = routes[path];
     if (handler) {
@@ -27,12 +32,13 @@ export const HistoryRouter = (function () {
 
   function init() {
     window.addEventListener("popstate", handlePopState);
-    push(window.location.pathname);
+    handleRoute(window.location.pathname);
   }
 
   return {
     init,
     push,
     addRoute,
+    replace,
   };
 })();
