@@ -1,5 +1,6 @@
 import { Viewer } from "@/entities/viewer";
 import { Component } from "@/shared/lib/component";
+import { HistoryRouter } from "@/shared/lib/router";
 
 export class BaseHeader extends Component {
   constructor(el) {
@@ -17,7 +18,7 @@ export class BaseHeader extends Component {
     if (event.target.id === "logout") {
       event.preventDefault();
       this.viewer.logout();
-      this.render();
+      HistoryRouter.push("/");
     }
   }
 
