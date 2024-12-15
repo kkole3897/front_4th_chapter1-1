@@ -1,3 +1,5 @@
+import { HistoryRouter } from "./shared/lib/router";
+
 const MainPage = () => `
   <div class="bg-gray-100 min-h-screen flex justify-center">
     <div class="max-w-md w-full">
@@ -233,9 +235,24 @@ const ProfilePage = () => `
   </div>
 `;
 
-document.body.innerHTML = `
-  ${MainPage()}
-  ${ProfilePage()}
-  ${LoginPage()}
-  ${ErrorPage()}
-`;
+const router = new HistoryRouter();
+const root = document.getElementById("root");
+router.addRoute("/", () => {
+  root.innerHTML = MainPage();
+});
+router.addRoute("/login", () => {
+  root.innerHTML = LoginPage();
+});
+router.addRoute("/profile", () => {
+  root.innerHTML = ProfilePage();
+});
+router.addRoute("/404", () => {
+  root.innerHTML = ErrorPage();
+});
+router.addRoute("*", () => {
+  router.navigateTo("/404");
+});
+window.addEventListener("load", () => {
+  const path = window.location.pathname;
+  router.handleRoute(path);
+});
