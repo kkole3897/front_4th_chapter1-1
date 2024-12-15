@@ -1,54 +1,24 @@
-class InvalidViewerError extends Error {
-  constructor(message) {
-    super(message);
-    this.name = "InvalidViewerError";
-  }
-}
-
-const VIEWER_KEY = "viewer";
+const VIEWER_KEY = "user";
 
 export class Viewer {
   constructor() {
     const rawViewer = localStorage.getItem(VIEWER_KEY);
 
     if (!rawViewer) {
-      this.email = null;
-      this.password = null;
-      this.name = null;
-      this.description = null;
+      this.viewer = null;
     } else {
       const parsedViewer = JSON.parse(rawViewer);
 
-      this.email = parsedViewer.email;
-      this.password = parsedViewer.password;
-      this.name = rawViewer.name ?? "";
-      this.description = rawViewer.description ?? "";
+      this.viewer = parsedViewer;
     }
   }
 
   get isAuthenticated() {
-    return this.email != null && this.password != null;
+    return this.viewer != null;
   }
 
-  validate(data) {
-    if (data.email == null && data.password == null) {
-      return false;
-    }
-
-    return true;
-  }
-
-  setData(data) {
-    if (this.validate(data)) {
-      throw InvalidViewerError(
-        `Invalid email(${data.email}) or password(${data.password})`,
-      );
-    }
-
-    this.email = data.email;
-    this.password = data.password;
-    this.name = data.name;
-    this.description = data.description;
+  login(data) {
+    this.viewer = data;
 
     localStorage.setItem(VIEWER_KEY, JSON.stringify(data));
   }
