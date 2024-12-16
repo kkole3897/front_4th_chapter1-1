@@ -26,7 +26,6 @@ export class ProfileForm extends Component {
 
   template() {
     const viewer = new Viewer();
-    console.log(viewer.viewer);
 
     return `
       <div class="mb-4">

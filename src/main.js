@@ -3,7 +3,7 @@ import { LoginPage } from "@/pages/login-page";
 import { MainPage } from "@/pages/main-page";
 import { ErrorPage } from "@/pages/error-page";
 import { ProfilePage } from "@/pages/profile-page";
-import { withProtectRoute } from "@/features/auth";
+import { Viewer } from "./entities/viewer";
 
 const router = HistoryRouter;
 const root = document.getElementById("root");
@@ -13,12 +13,16 @@ router.addRoute("/", () => {
 router.addRoute("/login", () => {
   new LoginPage(root).render();
 });
-router.addRoute(
-  "/profile",
-  withProtectRoute(() => {
+router.addRoute("/profile", () => {
+  const viewer = new Viewer();
+
+  if (viewer.isAuthenticated) {
     new ProfilePage(root).render();
-  }),
-);
+    return;
+  }
+
+  router.replace("/login");
+});
 router.addRoute("/404", () => {
   new ErrorPage(root).render();
 });
