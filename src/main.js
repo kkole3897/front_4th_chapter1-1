@@ -1,7 +1,7 @@
 import { HistoryRouter } from "@/shared/lib/router";
 import { LoginPage } from "@/pages/login-page";
 import { MainPage } from "@/pages/main-page";
-import { ErrorPage } from "@/pages/error-page";
+import { NotFoundPage } from "@/pages/not-found-page";
 import { ProfilePage } from "@/pages/profile-page";
 import { Viewer } from "./entities/viewer";
 
@@ -24,7 +24,7 @@ router.addRoute("/profile", () => {
   router.replace("/login");
 });
 router.addRoute("/404", () => {
-  new ErrorPage(root).render();
+  new NotFoundPage(root).render();
 });
 router.addRoute("*", () => {
   router.replace("/404");

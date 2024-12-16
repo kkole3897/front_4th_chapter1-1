@@ -1,6 +1,6 @@
 import { Component } from "@/shared/lib/component";
 
-export class ErrorPage extends Component {
+export class NotFoundPage extends Component {
   constructor(el) {
     super(el);
   }
