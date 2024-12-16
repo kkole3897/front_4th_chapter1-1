@@ -1,1 +1,7 @@
-export { signUpLocal, loginLocal, logout, withProtectRoute } from "./lib";
+export {
+  signUpLocal,
+  loginLocal,
+  logout,
+  withProtectRoute,
+  updateProfile,
+} from "./lib";

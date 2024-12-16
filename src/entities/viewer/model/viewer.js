@@ -42,4 +42,10 @@ export class Viewer {
     this.viewer = null;
     localStorage.removeItem(VIEWER_KEY);
   }
+
+  update(data) {
+    this.viewer = data;
+
+    localStorage.setItem(VIEWER_KEY, JSON.stringify(this.viewer));
+  }
 }
