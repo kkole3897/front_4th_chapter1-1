@@ -33,7 +33,7 @@ export class LoginForm extends Component {
   template() {
     return `
       <div class="mb-4">
-        <input id="username" type="text" name="username" placeholder="username" class="w-full p-2 border rounded">
+        <input id="username" type="text" name="username" placeholder="사용자 이름" class="w-full p-2 border rounded">
       </div>
       <div class="mb-6">
         <input type="password" name="password" placeholder="비밀번호" class="w-full p-2 border rounded">
